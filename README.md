@@ -12,11 +12,11 @@ yuyang
 **Entertainment**
 
 ## Use Case
-User: hand
-Mycroft:Taking a photo now. The item is possible to be...
-User: brand
-Mycroft:The brand is possible to be ...
-User: I like it
+User: hand `
+Mycroft:Taking a photo now. The item is possible to be... `
+User: brand `
+Mycroft:The brand is possible to be ... `
+User: I like it `
 Mycroft:Continue shopping
 
 
