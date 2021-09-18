@@ -4,8 +4,6 @@ It's a test skill in git
 ## About
 It's a test skill in git
 
-## Examples
-* "Take a photo"
 
 ## Credits
 yuyang
@@ -13,5 +11,12 @@ yuyang
 ## Category
 **Entertainment**
 
-## Tags
+## Use Case
+User: hand
+Mycroft:Taking a photo now. The item is possible to be...
+User: brand
+Mycroft:The brand is possible to be ...
+User: I like it
+Mycroft:Continue shopping
+
 
