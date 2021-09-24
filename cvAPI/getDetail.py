@@ -8,7 +8,7 @@ import sys
 sys.path.append('/opt/mycroft/skills/sandbox-git-skill/cvAPI')
 from util import callAPI, encode_image_from_file
 
-MYCROFT_VERSION = True
+MYCROFT_VERSION = False
 if MYCROFT_VERSION:
     from mycroft.util import LOG
 
@@ -117,11 +117,11 @@ def getDetail(image_file):
 
     return res
 
-
-# print(time.time())
-# a = getDetail('/opt/mycroft/skills/sandbox-git-skill/photo/white.png')
-# print(a)
-# print(time.time())
+if not MYCROFT_VERSION:
+    print(time.time())
+    a = getDetail('/opt/mycroft/skills/sandbox-git-skill/photo/1.jpeg')
+    print(a)
+    print(time.time())
 
     # for color in colorList:
     #     if float(color['score']) >= 0.1:
