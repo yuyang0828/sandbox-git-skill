@@ -4,7 +4,7 @@ import time
 import cv2
 import sys
 
-sys.path.append('/opt/mycroft/skills/sandbox-git-skill/cvAPI')
+sys.path.append('/opt/mycroft/skills/sandbox-git-skill.yuyang0828/cvAPI')
 from util import callAPI, encode_image_from_file
 
 def getObjectsThenLabel(image_file):

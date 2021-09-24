@@ -5,10 +5,10 @@ import time
 import sys
 
 
-sys.path.append('/opt/mycroft/skills/sandbox-git-skill/cvAPI')
+sys.path.append('/opt/mycroft/skills/sandbox-git-skill.yuyang0828/cvAPI')
 from util import callAPI, encode_image_from_file
 
-MYCROFT_VERSION = False
+MYCROFT_VERSION = True
 if MYCROFT_VERSION:
     from mycroft.util import LOG
 
