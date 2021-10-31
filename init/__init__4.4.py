@@ -53,7 +53,8 @@ class EasyShoppingSkill(MycroftSkill):
     @intent_handler('is.there.any.goods.intent')
     def handle_is_there_any_goods(self, message):
         if self.img_multi == '':
-            # if self.img_multi == '', then it means that user hasn't invoked intent(handle_view_goods)
+            # if self.img_multi == '', 
+            # then it means that user hasn't invoked intent(handle_view_goods)
             self.handle_no_context1(message)
         else:
             # if self.img_multi != '', then in real application we will call CV API
