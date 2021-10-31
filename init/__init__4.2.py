@@ -13,6 +13,7 @@ class EasyShoppingSkill(MycroftSkill):
     def initialize(self):
         self.log.info(LOGSTR + "initialize EasyShoppingSkill")
 
+    # ============================ use case 1 ============================
     @intent_handler('view.goods.intent')
     def handle_view_goods(self, message):
         self.speak('Taking a photo now. Please wait a second for me to get the result.')
@@ -22,7 +23,7 @@ class EasyShoppingSkill(MycroftSkill):
     def handle_is_there_any_goods(self, message):
         self.speak('yes, I find some goods in front of you')
  
-            
+    # ============================ use case 2 ============================        
     @intent_handler(IntentBuilder('ViewItemInHand').require('ViewItemInHandKeyWord'))
     def handle_view_item_in_hand(self, message):
         self.speak('Taking a photo now. Please wait a second for me to get the result.')

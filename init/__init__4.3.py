@@ -18,6 +18,7 @@ class EasyShoppingSkill(MycroftSkill):
     def initialize(self):
         self.log.info(LOGSTR + "initialize EasyShoppingSkill")
 
+    # ============================ use case 1 ============================
     @intent_handler('view.goods.intent')
     def handle_view_goods(self, message):
         self.speak_dialog('take.photo')
@@ -25,29 +26,27 @@ class EasyShoppingSkill(MycroftSkill):
 
     @intent_handler('is.there.any.goods.intent')
     def handle_is_there_any_goods(self, message):
-        self.speak_dialog('yes.goods',{'category': category_label,'location': loc_list[i]})
+        category_label = 'milk'
+        loc = 'left top'
+        self.speak_dialog('yes.goods',{'category': category_label,'location': loc})
 
-
+    # ============================ use case 2 ============================
     @intent_handler(IntentBuilder('ViewItemInHand').require('ViewItemInHandKeyWord'))
     def handle_view_item_in_hand(self, message):
         self.speak_dialog('take.photo')
 
         # in real application, we will call CV API to get the following information
-        self.category_str = ''
-        self.color_str = ''
-        self.brand_str = ''
-        self.kw_str = ''
+        self.category_str = 'milk'
+        self.color_str = 'black and white'
+        self.brand_str = 'Dutch Lady'
+        self.kw_str = 'pure farm, protein'
         self.speak_dialog('item.category', {'category': self.category_str})
         
 
     
     def handle_ask_item_detail(self, detail, detail_str):
-        if detail_str == '':
-            self.speak_dialog(
-            'cannot.get', {'detail': detail}, expect_response=True)
-        else:
-            dialog_str = 'item.' + detail
-            self.speak_dialog(dialog_str, {detail: detail_str}, expect_response=True)
+        dialog_str = 'item.' + detail
+        self.speak_dialog(dialog_str, {detail: detail_str})
 
     @intent_handler(IntentBuilder('AskItemCategory').require('Category').build())
     def handle_ask_item_category(self, message):
@@ -84,13 +83,6 @@ class EasyShoppingSkill(MycroftSkill):
         self.color_str = ''
         self.logo_str = ''
         self.kw_str = ''
-
-    @intent_handler(IntentBuilder('NoContext').one_of('Category', 'Color', 'Brand', 'Kw', 'Info'))
-    def handle_no_context2(self, message):
-        self.speak('Please let me have a look at what\'s on your hand first.')
-
-
-
 
 def create_skill():
     return EasyShoppingSkill()

@@ -73,8 +73,8 @@ def getLabel(image_base64):
     return res
 
 
-print('start', time.time())
-a = getObjectsThenLabel(
-    '/opt/mycroft/skills/sandbox-git-skill.yuyang0828/photo/1.jpeg')
-print(a)
-print('end', time.time())
+# print('start', time.time())
+# a = getObjectsThenLabel(
+#     '/opt/mycroft/skills/sandbox-git-skill.yuyang0828/photo/1.jpeg')
+# print(a)
+# print('end', time.time())
