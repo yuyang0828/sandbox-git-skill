@@ -3,6 +3,25 @@ from adapt.intent import IntentBuilder
 
 LOGSTR = '********************====================########## '
 
+def generate_str(possible_list):
+    '''
+    Generate string for Mycroft to speak it
+
+    Args: 
+        possible_list: array list with len = 3, each element is a string
+    Returns:
+        a string, e.g. possible_list = ['a', 'b', 'c'], res = 'a, b, and c'
+    '''
+    res = ''
+    if len(possible_list) == 3:
+        res = possible_list[0] + ' ' + \
+            possible_list[1] + ' and ' + possible_list[2]
+    elif len(possible_list) == 2:
+        res = possible_list[0] + ' and ' + possible_list[1]
+    elif len(possible_list) == 1:
+        res = possible_list[0]
+
+    return res
 
 class EasyShoppingSkill(MycroftSkill):
     
@@ -22,29 +41,45 @@ class EasyShoppingSkill(MycroftSkill):
 
     @intent_handler('is.there.any.goods.intent')
     def handle_is_there_any_goods(self, message):
-        # in real application, label_str will return from CV API
-        label_str = ['milk', 'drink', 'bottle']
+        # in real application, label_str and loc_list will return from CV API
+        label_list = [['milk', 'drink', 'bottle'], ['milk', 'drink', 'bottle']]
+        loc_list = ['left top', 'right top']
+
         category_label = message.data.get('category')
-        loc = 'left top'
+        detected = 0
 
-        if category_label in label_str:
-            self.speak_dialog('yes.goods',{'category': category_label,'location': loc})
+        for i in range(len(label_list)):
+            label_str = generate_str(label_list[i])
+            label_str = label_str.lower()
+    
+            if category_label is not None:
+                if category_label in label_str:
+                    self.speak_dialog('yes.goods',
+                                {'category': category_label,
+                                'location': loc_list[i]})
+                    detected = 1
+                    break
+            else:
+                continue
 
-        else:
-            self.speak_dialog('no.goods',{'category': category_label})
+        if detected == 0:
+            self.speak_dialog('no.goods',
+            {'category': category_label})
 
     # ============================ use case 2 ============================
     @intent_handler(IntentBuilder('ViewItemInHand').require('ViewItemInHandKeyWord'))
     def handle_view_item_in_hand(self, message):
         self.speak_dialog('take.photo')
-
-        # in real application, we will call CV API to get the following information
-        self.category_str = 'milk'
-        self.color_str = 'black and white'
-        self.brand_str = 'Dutch Lady'
-        self.kw_str = 'pure farm, protein'
-        self.speak_dialog('item.category', {'category': self.category_str})
         
+        # suppose we call CV API here to get the result, 
+        # the result will all be list, then we use generate_str() to create string
+        self.category_str = generate_str(['milk', 'bottle', 'drink'])
+        self.brand_str = generate_str(['Dutch Lady', 'Lady'])
+        self.color_str = generate_str(['white', 'black', 'blue'])
+        self.kw_str = ' '.join(['milk', 'bottle', 'protein', 'pure', 'farm'])
+
+        # speak dialog
+        self.speak_dialog('item.category', {'category': self.category_str})
 
     
     def handle_ask_item_detail(self, detail, detail_str):
