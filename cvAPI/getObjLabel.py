@@ -8,6 +8,10 @@ import sys
 sys.path.append('/opt/mycroft/skills/sandbox-git-skill.yuyang0828/cvAPI')
 from util import callAPI, encode_image_from_file
 
+MYCROFT_VERSION = True
+if MYCROFT_VERSION:
+    from mycroft.util import LOG
+    
 def getObjectsThenLabel(image_file):
 
     image_base64 = encode_image_from_file(image_file)
@@ -72,9 +76,9 @@ def getLabel(image_base64):
         res.append(labelList[i]["description"])
     return res
 
-
-# print('start', time.time())
-# a = getObjectsThenLabel(
-#     '/opt/mycroft/skills/sandbox-git-skill.yuyang0828/photo/1.jpeg')
-# print(a)
-# print('end', time.time())
+if not MYCROFT_VERSION:
+    print('start', time.time())
+    a = getObjectsThenLabel(
+        '/opt/mycroft/skills/sandbox-git-skill.yuyang0828/photo/1.jpeg')
+    print(a)
+    print('end', time.time())

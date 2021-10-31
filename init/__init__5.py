@@ -8,6 +8,7 @@ import os
 import sys
 from multiprocessing import Process, Queue
 
+# step 2.1: import the cvAPI
 sys.path.append('/opt/mycroft/skills/sandbox-git-skill.yuyang0828')
 from cvAPI import getDetail, getObjLabel
 
@@ -17,6 +18,7 @@ LOGSTR = '********************====================########## '
 # In both mode, camera will work normally, i.e. take the photo, save the photo
 MODE = 'NO TEST'
 
+# step 1.1: add take_photo function
 def take_photo(img_queue):
     '''
     Do taking photo
@@ -84,7 +86,7 @@ class EasyShoppingSkill(MycroftSkill):
         self.img_multi = ''
         self.img_hand = ''
 
-        #create another process to do the photo taking
+        # step 1.2: create another process to do the photo taking
         img_queue = Queue()
         take_photo_process = Process(target=take_photo, args=(img_queue,))
         take_photo_process.daemon = True
@@ -100,7 +102,8 @@ class EasyShoppingSkill(MycroftSkill):
             self.handle_no_context1(message)
 
         else:
-            # call cv api, and get result. 
+            # step 2.2: call cv api, and get result. 
+            # use try-catch block here, since there maybe error return from the cv api
             try:
                 self.log.info(LOGSTR + 'actual img path')
                 self.log.info(self.img_multi)
@@ -162,7 +165,7 @@ class EasyShoppingSkill(MycroftSkill):
         self.img_multi = ''
         self.img_hand = ''
 
-        # create another process to do the photo taking
+        # step 1.2: create another process to do the photo taking
         img_queue = Queue()
         take_photo_process = Process(target=take_photo, args=(img_queue,))
         take_photo_process.daemon = True
@@ -170,7 +173,8 @@ class EasyShoppingSkill(MycroftSkill):
         take_photo_process.join()
         self.img_hand = img_queue.get()
 
-        # call cv api, and get result. 
+        # step 2.2: call cv api, and get result. 
+        # use try-catch block here, since there maybe error return from the cv api
         try:
             self.log.info(LOGSTR + 'actual img path')
             self.log.info(self.img_hand)
