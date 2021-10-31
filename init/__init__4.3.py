@@ -14,10 +14,6 @@ class EasyShoppingSkill(MycroftSkill):
         self.kw_str = ''
         self.log.info(LOGSTR + "_init_ EasyShoppingSkill")
 
-
-    def initialize(self):
-        self.log.info(LOGSTR + "initialize EasyShoppingSkill")
-
     # ============================ use case 1 ============================
     @intent_handler('view.goods.intent')
     def handle_view_goods(self, message):
@@ -26,9 +22,16 @@ class EasyShoppingSkill(MycroftSkill):
 
     @intent_handler('is.there.any.goods.intent')
     def handle_is_there_any_goods(self, message):
-        category_label = 'milk'
+        # in real application, label_str will return from CV API
+        label_str = ['milk', 'drink', 'bottle']
+        category_label = message.data.get('category')
         loc = 'left top'
-        self.speak_dialog('yes.goods',{'category': category_label,'location': loc})
+
+        if category_label in label_str:
+            self.speak_dialog('yes.goods',{'category': category_label,'location': loc})
+
+        else:
+            self.speak_dialog('no.goods',{'category': category_label})
 
     # ============================ use case 2 ============================
     @intent_handler(IntentBuilder('ViewItemInHand').require('ViewItemInHandKeyWord'))
