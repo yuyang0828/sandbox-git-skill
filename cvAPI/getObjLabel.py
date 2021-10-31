@@ -1,5 +1,6 @@
 import base64
 import math
+from os import confstr
 import time
 import cv2
 import sys
@@ -14,6 +15,7 @@ def getObjectsThenLabel(image_file):
 
     # get location of each objects
     response = callAPI(image_base64, 'LOC')
+    print(response)
 
     obj_loc_list = response['responses'][0]["localizedObjectAnnotations"]
 
@@ -71,8 +73,8 @@ def getLabel(image_base64):
     return res
 
 
-# print('start', time.time())
-# a = getObjectsThenLabel(
-#     '/opt/mycroft/skills/sandbox-git-skill/photo/multi.jpeg')
-# print(a)
-# print('end', time.time())
+print('start', time.time())
+a = getObjectsThenLabel(
+    '/opt/mycroft/skills/sandbox-git-skill.yuyang0828/photo/1.jpeg')
+print(a)
+print('end', time.time())

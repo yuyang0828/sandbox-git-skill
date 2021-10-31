@@ -87,6 +87,7 @@ def callAPI(image_base64, mode='default'):
 
     # set api key
     api_key = 'AIzaSyBMUt71ab15xTtJlM6giUWqNxcSDGUroEg'
+    # api_key = 'AIzaSyBl3BGjHg4mirVzodDtDpCz81Bo21ZWUuk'
 
     parameters = {
         'key': api_key

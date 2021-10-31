@@ -8,7 +8,7 @@ import sys
 sys.path.append('/opt/mycroft/skills/sandbox-git-skill.yuyang0828/cvAPI')
 from util import callAPI, encode_image_from_file
 
-MYCROFT_VERSION = True
+MYCROFT_VERSION = False
 if MYCROFT_VERSION:
     from mycroft.util import LOG
 
